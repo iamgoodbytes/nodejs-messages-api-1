@@ -19,6 +19,12 @@ const create = async (req, res) => {
         let message = new Message();
         message.message = data.message;
         await message.save();
+
+        res.json({
+            status: "success",
+            message: `POST message with id: ${message._id}`,
+            data: message,
+        });
     } catch (err) {
         res.json({
             status: "error",
@@ -26,11 +32,6 @@ const create = async (req, res) => {
         });
         return;
     }
-
-    res.json({
-        status: "success",
-        message: `POST message with id: ${message._id}`,
-    });
 };
 
 module.exports = {

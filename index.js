@@ -10,7 +10,9 @@ mongoose.connect("mongodb://127.0.0.1:27017/todov1");
 
 // get DBCONN from .env
 const dbConn = process.env.DBCONN;
+const myName = process.env.MYNAME;
 console.log(dbConn);
+console.log(myName);
 
 // require the routes
 const messagesRouter = require("./routes/api/v1/messages");
