@@ -113,9 +113,33 @@ const update = async (req, res) => {
     });
 };
 
+const destroy = async (req, res) => {
+    let id = req.params.id;
+
+    // if ID Is missing return 404
+    if (!id) {
+        res.status(404).json({
+            status: "error",
+            message: "ID is required",
+        });
+        return;
+    }
+
+    res.status(200).json({
+        status: "success",
+        message: "DELETED message by id" + id,
+        data: {
+            message: {
+                _id: id,
+            },
+        },
+    });
+};
+
 module.exports = {
     index,
     create,
     show,
     update,
+    destroy,
 };
