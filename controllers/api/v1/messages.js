@@ -2,7 +2,19 @@
 const Message = require("../../../models/Message");
 
 const index = async (req, res) => {
-    let data = await Message.find();
+    //let data = await Message.find();
+    let data = {
+        message: "GET messages",
+        status: "success",
+        messages: [
+            {
+                message: "Hello World",
+            },
+            {
+                message: "Hello World",
+            },
+        ],
+    };
     res.json({
         status: "success",
         message: "GET messages",
@@ -18,7 +30,7 @@ const create = async (req, res) => {
     try {
         let message = new Message();
         message.message = data.message;
-        await message.save();
+        //await message.save();
 
         res.json({
             status: "success",
