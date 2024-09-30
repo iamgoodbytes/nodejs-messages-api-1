@@ -15,7 +15,7 @@ const index = async (req, res) => {
             },
         ],
     };
-    res.json({
+    res.status(200).json({
         status: "success",
         message: "GET messages",
         data: data,
@@ -53,7 +53,38 @@ const create = async (req, res) => {
     }
 };
 
+// add function to return one message by :id
+const show = async (req, res) => {
+    let id = req.params.id;
+
+    // if ID Is missing return 404
+    if (!id) {
+        res.status(404).json({
+            status: "error",
+            message: "ID is required",
+        });
+        return;
+    }
+
+    let data = {
+        message: "GET message by id " + id,
+        status: "success",
+        data: {
+            message: {
+                id: id,
+                text: "Hello World",
+            },
+        },
+    };
+    res.status(200).json({
+        status: "success",
+        message: "GET message by id",
+        data: data,
+    });
+};
+
 module.exports = {
     index,
     create,
+    show,
 };
