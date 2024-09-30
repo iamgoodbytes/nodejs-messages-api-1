@@ -83,8 +83,39 @@ const show = async (req, res) => {
     });
 };
 
+// put update
+const update = async (req, res) => {
+    let id = req.params.id;
+    let data = {
+        text: req.body.message.text,
+        user: req.body.message.user,
+    };
+
+    // if ID Is missing return 404
+    if (!id) {
+        res.status(404).json({
+            status: "error",
+            message: "ID is required",
+        });
+        return;
+    }
+
+    res.status(200).json({
+        status: "success",
+        message: "PUT message by id",
+        data: {
+            message: {
+                id: id,
+                text: data.text,
+                user: data.user,
+            },
+        },
+    });
+};
+
 module.exports = {
     index,
     create,
     show,
+    update,
 };
