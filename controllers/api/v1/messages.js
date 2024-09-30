@@ -24,18 +24,25 @@ const index = async (req, res) => {
 
 const create = async (req, res) => {
     let data = {
-        message: req.body.message,
+        text: req.body.message.text,
+        user: req.body.message.user,
     };
 
     try {
         let message = new Message();
-        message.message = data.message;
+        message.text = data.text;
+        message.user = data.user;
         //await message.save();
 
         res.json({
             status: "success",
             message: `POST message with id: ${message._id}`,
-            data: message,
+            data: {
+                message: {
+                    user: data.user,
+                    text: message.text,
+                },
+            },
         });
     } catch (err) {
         res.json({
